@@ -1,0 +1,18 @@
+{# Settings dictionary with default values #}
+{% set default_settings = {
+    'oracle_client': {
+      'dl_opts': '-b oraclelicense=accept-securebackup-cookie -L',
+      'packages': {
+        'default': [
+          'oracle-instantclient12.1-basic',
+          'oracle-instantclient12.1-sqlplus'
+        ]
+      },
+      'pkg_version_name': '12.1.0.2.0-1.x86_64.rpm',
+      'pkg_version_short_name': '12.1',
+      'profileddir': '/etc/profile.d'
+    }
+} %}
+
+{# Update settings defaults from pillar data #}
+{% set oracle_client_settings = salt['pillar.get']('oracle_client', default=default_settings.oracle_client, merge=True) %}
